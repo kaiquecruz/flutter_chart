@@ -207,7 +207,7 @@ class Pie<T> extends ChartBodyRender<T> {
     Offset end1Offset = Offset(end1X, end1Y);
     Paint paint = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.white
+      ..color = Colors.transparent
       ..strokeWidth = spaceWidth!;
     canvas.drawLine(start1Offset, end1Offset, paint);
     //结束线
