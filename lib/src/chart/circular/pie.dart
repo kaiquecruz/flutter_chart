@@ -19,6 +19,7 @@ class Pie<T> extends ChartBodyRender<T> {
     this.legendTextStyle = const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold),
     this.lineColor = Colors.grey,
     this.spaceWidth,
+    this.colorSpaceWidth,
     this.valueTextOffset = 0,
     this.valueFormatter,
     this.legendFormatter,
@@ -70,6 +71,8 @@ class Pie<T> extends ChartBodyRender<T> {
 
   ///百分比
   final double? spaceWidth;
+
+  final Color? colorSpaceWidth;
 
   ///是否能点击
   final bool enableTap;
@@ -164,7 +167,7 @@ class Pie<T> extends ChartBodyRender<T> {
       }
       drawPie(canvas, tapShape.path!, _paint);
       //绘制间隙
-      _drawSpaceLine(layout, canvas, rd, startAngle, sweepAngle);
+      _drawSpaceLine(layout, canvas, rd, startAngle, sweepAngle, colorSpaceWidth);
 
       String? valueText = valueFormatter?.call(item);
       String? legend = legendFormatter?.call(item);
@@ -193,7 +196,7 @@ class Pie<T> extends ChartBodyRender<T> {
 
   ///画空隙线
   void _drawSpaceLine(
-      ChartCircularCoordinateState layout, Canvas canvas, double radius, double startAngle, double sweepAngle) {
+      ChartCircularCoordinateState layout, Canvas canvas, double radius, double startAngle, double sweepAngle, Color? colorSpaceWidth) {
     if (spaceWidth == null) {
       return;
     }
@@ -207,7 +210,7 @@ class Pie<T> extends ChartBodyRender<T> {
     Offset end1Offset = Offset(end1X, end1Y);
     Paint paint = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.white
+      ..color = colorSpaceWidth? Colors.white
       ..strokeWidth = spaceWidth!;
     canvas.drawLine(start1Offset, end1Offset, paint);
     //结束线
