@@ -294,11 +294,7 @@ class Pie<T> extends ChartBodyRender<T> {
       // 使用三角函数计算文字位置 并根据文字大小适配
       Offset textOffset =
           Offset(isLeft ? point3.dx : point3.dx - legendTextPainter.width, point3.dy - legendTextPainter.height);
-      Paint dotPaint = Paint()
-        ..style = PaintingStyle.fill
-        ..color = colors[index]
-        ..strokeWidth = 1;
-      canvas.drawCircle(Offset(textOffset.dx - 6, textOffset.dy + legendTextPainter.height / 2), 4, dotPaint);
+
       legendTextPainter.paint(canvas, textOffset);
     }
 
